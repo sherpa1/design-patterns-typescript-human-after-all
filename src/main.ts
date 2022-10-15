@@ -1,3 +1,12 @@
+interface ICommunicant {
+    _firstname: string;
+    _lastname: string;
+    fullname(): string;
+    say(something: string): string;
+    answer(something: string, someone: ICommunicant): string;
+    ask(something: string, someone: ICommunicant): string;
+}
+
 class Human {
     protected _firstname: string;
     protected _lastname: string;
@@ -11,15 +20,15 @@ class Human {
         return `${this._firstname} ${this._lastname}`;
     }
 
-    say(something: string) {
+    say(something: string): string {
         return `- ${this.fullname()} says : "${something}"`;
     }
 
-    answer(something: string, someone: Human) {
+    answer(something: string, someone: Human): string {
         return `- ${this.fullname()} answers to ${someone.fullname()} : "${something}"`;
     }
 
-    ask(something: string, someone: Human) {
+    ask(something: string, someone: Human): string {
         return `- ${this.fullname()} asks to ${someone.fullname()} : "${something}"`;
     }
 
