@@ -1,0 +1,23 @@
+{
+  "name": "design-patterns-human-after-all",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest",
+    "watch": "ts-node-dev --respawn src/main.ts",
+    "build": "tsc --outDir dist src/*"
+  },
+  "author": "Alexandre Leroux (alex@sherpa.one)",
+  "license": "ISC",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "pm2": "^5.2.2",
+    "ts-node-dev": "^2.0.0"
+  }
+}
