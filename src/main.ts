@@ -11,15 +11,15 @@ class Human {
         return `${this._firstname} ${this._lastname}`;
     }
 
-    say(something: string) {
+    say(something: string): string {
         return `- ${this.fullname()} says : "${something}"`;
     }
 
-    answer(something: string, someone: Human) {
+    answer(something: string, someone: Human): string {
         return `- ${this.fullname()} answers to ${someone.fullname()} : "${something}"`;
     }
 
-    ask(something: string, someone: Human) {
+    ask(something: string, someone: Human): string {
         return `- ${this.fullname()} asks to ${someone.fullname()} : "${something}"`;
     }
 
@@ -76,6 +76,7 @@ function main() {
     console.log(hal_9000.s4y(`@&$*%+=£`));
 
     try {
+        //Human can't communicate with Alien
         john_doe.ask('Where are you coming from ?', hal_9000);
     } catch (error) {
         console.error(error);
