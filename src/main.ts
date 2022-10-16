@@ -1,8 +1,10 @@
+//création d'une interface définissant un contrant commun à tous types d'élément souhait collaborer avec la classe Dialog
 interface ICommunicant {
     fullname(): string;
     say(something: string): string;
 }
 
+//la classe Dialog utilise un type abstait pour son injection de dépendance
 class Dialog {
     static log(who: ICommunicant, what: string, toWho?: ICommunicant) {
         let str: string = `- ${who.fullname()} says `;
@@ -14,6 +16,7 @@ class Dialog {
     }
 }
 
+//la classe Human implémente l'interface ICommunicant
 class Human implements ICommunicant {
     _firstname: string;
     _lastname: string;
@@ -45,6 +48,7 @@ class Human implements ICommunicant {
     }
 }
 
+//la classe Alien ne change pas
 class Alien {
     protected _name: string;
 
@@ -65,6 +69,8 @@ class Alien {
 
 }
 
+//On utilise une classe inspirée du Design Pattern du GoF Adapter
+//pour permettre à la classe Alien de collaborer avec Dialog
 class AlienAdapterToHuman implements ICommunicant {
 
     private _alien: Alien;
@@ -100,8 +106,8 @@ function main() {
     Dialog.log(adapterToHuman, adapterToHuman.say(`@&$*%+=£`))
 
     try {
-        Dialog.log(john_doe, john_doe.say('Where are you coming from ?'), adapterToHuman);
-        Dialog.log(adapterToHuman, adapterToHuman.say("I come from Mars"), john_doe);
+        Dialog.log(john_doe, john_doe.say('Where do you come from ?'), adapterToHuman);
+        Dialog.log(adapterToHuman, adapterToHuman.say("I come from Mars and will invade the Earth"), john_doe);
     } catch (error) {
         console.error(error);
     }
