@@ -10,8 +10,8 @@ class Dialog {
 }
 
 class Human {
-    protected _firstname: string;
-    protected _lastname: string;
+    _firstname: string;
+    _lastname: string;
 
     constructor(firstname: string, lastname: string) {
         this._firstname = firstname;
@@ -23,15 +23,7 @@ class Human {
     }
 
     say(something: string): string {
-        return `- ${this.fullname()} says : "${something}"`;
-    }
-
-    answer(something: string, someone: Human): string {
-        return `- ${this.fullname()} answers to ${someone.fullname()} : "${something}"`;
-    }
-
-    ask(something: string, someone: Human): string {
-        return `- ${this.fullname()} asks to ${someone.fullname()} : "${something}"`;
+        return something;
     }
 
     public get firstname(): string {
