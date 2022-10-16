@@ -68,19 +68,19 @@ class AlienAdapterToHuman {
 
 function main() {
     const john_doe = new Human("John", "Doe");
-    console.log(john_doe.say('Hello, World !'));
 
-    const james_white = new Human("James", "White");
-    console.log(john_doe.ask('What is your name ?', james_white));
+    Dialog.log(john_doe, john_doe.say('Hello, World !'));
 
-    console.log(james_white.answer(`My name is ${james_white.fullname()}`, john_doe));
+    const dave_bowman = new Human("Dave", "Bowman");
+
+    Dialog.log(john_doe, john_doe.say('What is your name ?'), dave_bowman);
+
+    Dialog.log(dave_bowman, dave_bowman.say(`My name is ${dave_bowman.fullname()}`), john_doe);
 
     const hal_9000 = new Alien('HAL9000');
-    console.log(hal_9000.s4y(`@&$*%+=£`));
 
     try {
-        //Human can't communicate with Alien
-        john_doe.ask('Where are you coming from ?', hal_9000);
+        Dialog.log(hal_9000, hal_9000.s4y("*$£€&@#"));
     } catch (error) {
         console.error(error);
     }
