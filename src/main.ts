@@ -1,5 +1,10 @@
+interface ICommunicant {
+    fullname(): string;
+    say(something: string): string;
+}
+
 class Dialog {
-    static log(who: Human, what: string, toWho?: Human) {
+    static log(who: ICommunicant, what: string, toWho?: ICommunicant) {
         let str: string = `- ${who.fullname()} says `;
 
         if (toWho) str += `to ${toWho.fullname()} `;
@@ -9,7 +14,7 @@ class Dialog {
     }
 }
 
-class Human {
+class Human implements ICommunicant {
     _firstname: string;
     _lastname: string;
 
@@ -48,7 +53,7 @@ class Alien {
     }
 
     s4y(something: string): string {
-        return `- ${this._name} 54y5 : "${something}"`;
+        return something;
     }
 
     public get name(): string {
@@ -60,10 +65,22 @@ class Alien {
 
 }
 
-class AlienAdapterToHuman {
-    constructor(alien: Alien) {
+class AlienAdapterToHuman implements ICommunicant {
 
+    private _alien: Alien;
+
+    constructor(alien: Alien) {
+        this._alien = alien;
     }
+
+    fullname(): string {
+        return `${this._alien.name}`;
+    }
+
+    say(something: string): string {
+        return `${this._alien.s4y(something)}`;
+    }
+
 }
 
 function main() {
@@ -79,8 +96,12 @@ function main() {
 
     const hal_9000 = new Alien('HAL9000');
 
+    const adapterToHuman = new AlienAdapterToHuman(hal_9000);
+    Dialog.log(adapterToHuman, adapterToHuman.say(`@&$*%+=£`))
+
     try {
-        Dialog.log(hal_9000, hal_9000.s4y("*$£€&@#"));
+        Dialog.log(john_doe, john_doe.say('Where are you coming from ?'), adapterToHuman);
+        Dialog.log(adapterToHuman, adapterToHuman.say("I come from Mars"), john_doe);
     } catch (error) {
         console.error(error);
     }
