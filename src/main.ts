@@ -1,10 +1,5 @@
-interface ICommunicant {
-    fullname(): string;
-    say(something: string): string;
-}
-
 class Dialog {
-    static log(who: ICommunicant, what: string, toWho?: ICommunicant) {
+    static log(who: Human, what: string, toWho?: Human) {
         let str: string = `- ${who.fullname()} says `;
 
         if (toWho) str += `to ${toWho.fullname()} `;
@@ -14,7 +9,7 @@ class Dialog {
     }
 }
 
-class Human implements ICommunicant {
+class Human {
     _firstname: string;
     _lastname: string;
 
@@ -65,24 +60,6 @@ class Alien {
 
 }
 
-class AlienAdapterToHuman implements ICommunicant {
-
-    private _alien: Alien;
-
-    constructor(alien: Alien) {
-        this._alien = alien;
-    }
-
-    fullname(): string {
-        return `${this._alien.name}`;
-    }
-
-    say(something: string): string {
-        return `${this._alien.s4y(something)}`;
-    }
-
-}
-
 function main() {
     const john_doe = new Human("John", "Doe");
 
@@ -96,14 +73,11 @@ function main() {
 
     const hal_9000 = new Alien('HAL9000');
 
-    const adapterToHuman = new AlienAdapterToHuman(hal_9000);
-    Dialog.log(adapterToHuman, adapterToHuman.say(`@&$*%+=£`))
-
     try {
-        Dialog.log(john_doe, john_doe.say('Where are you coming from ?'), adapterToHuman);
-        Dialog.log(adapterToHuman, adapterToHuman.say("I come from Mars"), john_doe);
+        Dialog.log(hal_9000, "#*$£+%@&");//la classe Dialog ne peut pas collaborer avec une instance de type Alien
     } catch (error) {
         console.error(error);
+        //  Type 'Alien' is missing the following properties from type 'Human': _firstname, _lastname, fullname, say, and 2 more.
     }
 
 }
