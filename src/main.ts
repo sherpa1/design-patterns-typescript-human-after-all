@@ -1,3 +1,14 @@
+class Dialog {
+    static log(who: Human, what: string, toWho?: Human) {
+        let str: string = `- ${who.fullname()} says `;
+
+        if (toWho) str += `to ${toWho.fullname()} `;
+        str += `: "${what}"`;
+
+        console.log(str);
+    }
+}
+
 class Human {
     protected _firstname: string;
     protected _lastname: string;
